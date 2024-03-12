@@ -29,31 +29,13 @@ public class Permissao {
     @Column(name = "NM_PERMISSAO")
     private String nome;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(
-            name = "TB_PF_SISTEMA",
-            joinColumns = {
-                    @JoinColumn(
-                            name = "PERMISSAO",
-                            referencedColumnName = "ID_PERMISSAO",
-                            foreignKey = @ForeignKey(
-                                    name = "FK_PESSOA_PERMISSAO"
-                            )
-                    )
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(
-                            name = "SISTEMA",
-                            referencedColumnName = "ID_SISTEMA",
-                            foreignKey = @ForeignKey(
-                                    name = "FK_PERMISSAO_SISTEMA"
-
-                            )
-
-                    )
-            }
-
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(
+            name = "SISTEMA",
+            referencedColumnName = "ID_SISTEMA",
+            foreignKey = @ForeignKey(name = "FK_SISTEMA_PERMISSAO")
     )
     private Sistema sistema;
+
 
 }

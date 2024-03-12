@@ -32,33 +32,26 @@ public class Sistema {
     @Column(name = "NM_SISTEMA")
     private String nome;
 
-    @Column(name= "SG_SISTEMA")
+    @Column(name= "SIGLA")
     private String sigla;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
-            name = "TB_PF_USUARIO",
+            name = "TB_PF_RESPONSAVEIS",
             joinColumns = {
                     @JoinColumn(
                             name = "SISTEMA",
                             referencedColumnName = "ID_SISTEMA",
-                            foreignKey = @ForeignKey(
-                                    name = "FK_RESPONSAVEIS_SISTEMA"
-                            )
+                            foreignKey = @ForeignKey(name = "FK_RESPONSAVEIS_SISTEMA")
                     )
             },
             inverseJoinColumns = {
-                @JoinColumn(
-                        name = "USUARIO",
-                        referencedColumnName = "ID_USUARIO",
-                        foreignKey = @ForeignKey(
-                                name = "FK_SISEMA_RESPONSAVEIS"
-
-                        )
-
-                )
+                    @JoinColumn(
+                            name = "USUARIO",
+                            referencedColumnName = "ID_USUARIO",
+                            foreignKey = @ForeignKey(name = "FK_SISTEMA_RESPONSAVEIS")
+                    )
             }
-
     )
     private Set<Usuario> responsaveis = new LinkedHashSet<>();
 }

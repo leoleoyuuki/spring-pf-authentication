@@ -3,9 +3,8 @@ spring:
     url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
     username: rm552184
     password: 270605
-    driver-class-name: oracle.jdbc.OracleDriver
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
       open-in-view: false
-      show-sql: false
+      show-sql: true

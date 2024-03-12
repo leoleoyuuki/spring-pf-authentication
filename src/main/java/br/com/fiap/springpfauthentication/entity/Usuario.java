@@ -32,30 +32,11 @@ public class Usuario {
     @Column(name = "SENHA_USUARIO")
     private String senha;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(
-            name = "TB_PF_PESSOA",
-            joinColumns = {
-                    @JoinColumn(
-                            name = "USUARIO",
-                            referencedColumnName = "ID_USUARIO",
-                            foreignKey = @ForeignKey(
-                                    name = "FK_PESSOA_USUARIO"
-                            )
-                    )
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(
-                            name = "PESSOA",
-                            referencedColumnName = "ID_PESSOA",
-                            foreignKey = @ForeignKey(
-                                    name = "FK_USUARIO_PESSOA"
-
-                            )
-
-                    )
-            }
-
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(
+            name = "Pessoa",
+            referencedColumnName = "ID_PESSOA",
+            foreignKey = @ForeignKey(name = "FK_PESSOA_USUARIO")
     )
     private Pessoa pessoa;
 }

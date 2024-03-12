@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Entity
 @Table(name = "TB_PF_PERFIL")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Perfil {
 
     @Id
@@ -24,7 +24,6 @@ public class Perfil {
             sequenceName = "SQ_PERFIL",
             initialValue = 1,
             allocationSize = 1
-
     )
     @Column(name = "ID_PERFIL")
     private Long id;
@@ -34,7 +33,7 @@ public class Perfil {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
-            name = "TB_PF_PERMISSAO",
+            name = "TB_PF_PERMISSOES",
             joinColumns = {
                     @JoinColumn(
                             name = "PERFIL",
@@ -50,13 +49,9 @@ public class Perfil {
                             referencedColumnName = "ID_PERMISSAO",
                             foreignKey = @ForeignKey(
                                     name = "FK_PERFIL_PERMISSOES"
-
                             )
-
                     )
             }
-
     )
-    private Set<Perfil> permissoes = new LinkedHashSet<>();
-
+    private Set<Permissao> permissoes = new LinkedHashSet<>();
 }
